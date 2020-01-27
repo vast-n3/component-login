@@ -1,0 +1,33 @@
+<div class="container mx-auto md:w-2/3 py-4">
+
+    <div class="flex flex-wrap ">
+        <div class="w-full md:w-1/2 px-4 md:pr-4">
+            <login register-link="{{base}}register/"></login>
+        </div>
+        <div class="w-full md:w-1/2 px-4 md:px-0">
+            <h2 class="text-4xl text-teal-700">Login</h2>
+            <code class="bg-gray-800 text-white p-2">&ltlogin>&lt/login></code>
+            <p class="my-4 text-gray-700">
+                Authenticates a registered user.
+            </p>
+            <table class="table-auto border border-collapse">
+                <tr>
+                    <th class="px-4 py-2">Prop</th>
+                    <th class="px-4 py-2">Type</th>
+                    <th class="px-4 py-2">Function</th>
+                </tr>
+                <tr>
+                    <td class="p-2 border">mode</td>
+                    <td class="p-2 border">String ('user', 'email', undefined)</td>
+                    <td class="p-2 border">Defaults to 'user' and defined if login is done by email or user name.</td>
+                </tr>
+                <tr>
+                    <td class="p-2 border">register-link</td>
+                    <td class="p-2 border">String ('[url]', undefined)</td>
+                    <td class="p-2 border">Can be used to add a link to registration</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
