@@ -1,0 +1,32 @@
+{
+  "name": "vast-n3/login",
+  "description": "Authentication component",
+  "minimum-stability": "dev",
+  "require": {
+    "mnsami/composer-custom-directory-installer": "1.1.*",
+    "neoan3-apps/stateless": "^1",
+    "neoan3-model/user": "dev-master",
+    "neoan3-frame/vastn3": "dev-master"
+  },
+  "license": "GPL-3.0-only",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/vast-n3/vastn3.git"
+    },{
+      "type": "vcs",
+      "url": "https://github.com/sroehrl/neoan3-userModel.git"
+    }
+  ],
+  "extra": {
+    "installer-paths": {
+      "./frame/{$name}": [
+        "neoan3-frame/vastn3"
+      ],
+      "./model/{$name}": [
+        "neoan3-model/user"
+      ],
+      "./component/{$name}": []
+    }
+  }
+}
