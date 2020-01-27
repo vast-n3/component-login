@@ -6,7 +6,7 @@
     "mnsami/composer-custom-directory-installer": "1.1.*",
     "neoan3-apps/stateless": "^1",
     "neoan3-model/user": "dev-master",
-    "neoan3-frame/vastn3": "dev-master"
+    "vast-n3/vastn3": "dev-master"
   },
   "license": "GPL-3.0-only",
   "repositories": [
