@@ -1,50 +1,52 @@
 <div class="w-full">
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" v-on:submit.prevent="doLogin" v-if="!token">
-        <div class="input" v-if="!mode || mode==='user'">
-            <label>
-                Username
-            </label>
-            <input aria-label="username" type="text" minlength="3" required v-model="userName">
-        </div>
-        <div class="input" v-if="mode==='email'">
-            <label>
-                Email
-            </label>
-            <input aria-label="email" type="email" required v-model="email">
-        </div>
-        <div class="input">
-            <label>
-                Password
-            </label>
-            <input aria-label="password" minlength="6" required type="password" v-model="password">
-        </div>
-        <div class="mb-4" v-if="!valid">
-            <p class="text-red-700 font-bold">Credentials not valid</p>
-        </div>
-        <animation v-if="busy" ></animation>
-        <div class="flex items-center justify-between mt-2">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" v-on:submit.prevent="doLogin">
+        <div v-if="!token">
+            <div class="input" v-if="!mode || mode==='user'">
+                <label>
+                    Username
+                </label>
+                <input aria-label="username" type="text" minlength="3" required v-model="userName">
+            </div>
+            <div class="input" v-if="mode==='email'">
+                <label>
+                    Email
+                </label>
+                <input aria-label="email" type="email" required v-model="email">
+            </div>
+            <div class="input">
+                <label>
+                    Password
+                </label>
+                <input aria-label="password" minlength="6" required type="password" v-model="password">
+            </div>
+            <div class="mb-4" v-if="!valid">
+                <p class="text-red-700 font-bold">Credentials not valid</p>
+            </div>
+            <animation v-if="busy" ></animation>
+            <div class="flex items-center justify-between mt-2">
 
-            <button :disabled="!formValid||busy"
-                    class="text-primary bg-transparent border-primary focus:bg-primary focus:text-white disabled:cursor-not-allowed disabled:opacity-50"
-                    type="submit">Sign in
+                <button :disabled="!formValid||busy"
+                        class="text-primary bg-transparent border-primary focus:bg-primary focus:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                        type="submit">Sign in
+                </button>
+
+                <a class="inline-block align-baseline font-bold text-sm text-secondary hover:text-primary" href="#">
+                    Forgot Password?
+                </a>
+            </div>
+
+            <p v-if="registerLink" class="text-center text-secondary mt-2 pt-2 border-t border-secondary text-sm hover:text-primary">
+                <a v-bind:href="registerLink">No account? Register</a>
+            </p>
+        </div>
+        <div v-if="token">
+            <p>Authentication valid until: <br> {{expiration.toLocaleTimeString()}}</p>
+            <a href="#" class="block text-sm text-teal-500" @click.prevent="refreshToken">refresh</a>
+            <button @click="logout" class="mt-4 bg-transparent text-red-700 py-2 px-4 border border-red-400 hover:bg-red-700 hover:text-white" href="#">
+                Log out
             </button>
-
-            <a class="inline-block align-baseline font-bold text-sm text-secondary hover:text-primary" href="#">
-                Forgot Password?
-            </a>
         </div>
-
-        <p v-if="registerLink" class="text-center text-secondary mt-2 pt-2 border-t border-secondary text-sm hover:text-primary">
-            <a v-bind:href="registerLink">No account? Register</a>
-        </p>
     </form>
-    <div class="bg-white shadow-md rounded p-6 m-4" v-if="token">
-        <p>Authentication valid until: <br> {{expiration.toLocaleTimeString()}}</p>
-        <a href="#" class="block text-sm text-teal-500" @click.prevent="refreshToken">refresh</a>
-        <button @click="logout" class="mt-4 bg-transparent text-red-700 py-2 px-4 border border-red-400 hover:bg-red-700 hover:text-white" href="#">
-            Log out
-        </button>
-    </div>
 
 </div>
 

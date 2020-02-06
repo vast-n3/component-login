@@ -18,13 +18,7 @@ Vue.component('login', {
         password: function(){
             let valid = true;
             if(this.loginForm){
-                let inputs = this.loginForm.getElementsByTagName('input');
-                for(let input of inputs) {
-                    if(valid){
-                        valid = input.validity.valid;
-                    }
-                }
-                this.formValid = valid;
+                this.validation();
             }
 
         },
@@ -49,12 +43,26 @@ Vue.component('login', {
         }
     },
     methods: {
+        validation(){
+            let valid = true;
+            let inputs = this.loginForm.getElementsByTagName('input');
+            for(let input of inputs) {
+                if(valid){
+                    valid = input.validity.valid;
+                }
+            }
+            this.formValid = valid;
+        },
         logout: function () {
             ['token', 'validThrough', 'user'].forEach(prop => {
                 delete localStorage[prop];
                 this._data[prop] = null;
             });
             this.loggedIn = null;
+            setTimeout(()=>{
+                this.validation();
+                this.$root.$emit('loggedIn', false);
+            },100);
         },
         doLogin: async function () {
             this.busy = true;
@@ -67,10 +75,11 @@ Vue.component('login', {
 
             api.post('login', obj).then(result => {
                 ['token', 'validThrough', 'user'].forEach((prop) => {
-                    localStorage.setItem(prop, result.data[prop]);
+                    localStorage.setItem(prop, JSON.stringify(result.data[prop]));
                     this._data[prop] = result.data[prop];
                 });
                 this.busy = false;
+                this.$root.$emit('loggedIn', true);
             }).catch(err => {
                 console.log(err);
                 this.valid = false;

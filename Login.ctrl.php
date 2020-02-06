@@ -12,15 +12,19 @@ use Neoan3\Model\UserModel;
  */
 class Login extends Vastn3
 {
+    static function dependencies()
+    {
+        return ['animation'];
+    }
+
     /**
      *
      */
     function init()
     {
-
         $this
             ->hook('main', 'login', [])
-            ->vueComponents(['login','register'])
+            ->vueComponents(['login', 'register'])
             ->output();
     }
 
